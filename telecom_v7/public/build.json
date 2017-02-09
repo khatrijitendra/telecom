@@ -1,0 +1,7 @@
+{
+	"js/telecom_v7.js": [
+		"public/js/timeline.html",
+		"public/js/timeline.js",
+		"public/js/issue_calendar.js"
+	]
+}

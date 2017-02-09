@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include telecom_v7 *.css
+recursive-include telecom_v7 *.csv
+recursive-include telecom_v7 *.html
+recursive-include telecom_v7 *.ico
+recursive-include telecom_v7 *.js
+recursive-include telecom_v7 *.json
+recursive-include telecom_v7 *.md
+recursive-include telecom_v7 *.png
+recursive-include telecom_v7 *.py
+recursive-include telecom_v7 *.svg
+recursive-include telecom_v7 *.txt
+recursive-exclude telecom_v7 *.pyc

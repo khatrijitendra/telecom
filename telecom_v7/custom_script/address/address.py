@@ -3,7 +3,6 @@ import frappe
 from frappe.model.naming import make_autoname, getseries
 
 def autoname(self,method=None):
-	frappe.errprint("inside autoname")
 	if(self.customer):
 		abbr = frappe.db.get_value("Customer",self.customer,"abbr")
 		self.name = make_autoname(abbr + "-.####")
@@ -18,7 +17,6 @@ def autoname(self,method=None):
 			throw(_("Address Title is mandatory."))
 
 def validate(self,method=None):
-	frappe.errprint("inside validate")
 	if(self.customer):
 		self.location_id = self.name
 

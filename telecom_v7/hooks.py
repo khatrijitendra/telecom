@@ -76,8 +76,8 @@ app_include_js = "/assets/js/telecom_v7.js"
 
 doc_events = {
     "Customer": {
-        "validate": "telecom_v7.custom_script.customer.validate",
-        "after_rename": "telecom_v7.custom_script.customer.after_rename"
+        "validate": "telecom_v7.custom_script.customer.customer.validate",
+        "after_rename": "telecom_v7.custom_script.customer.customer.after_rename"
     },
     "Address": {
         "validate": "telecom_v7.custom_script.address.address.validate",
@@ -92,7 +92,7 @@ doc_events = {
 doctype_js = {
     "Customer":["custom_script/customer/customer.js"],
     "Address":["custom_script/address/address.js"],
-    "Contact":["custom_script/contactcontact.js"],
+    "Contact":["custom_script/contact/contact.js"],
     "Issue":["custom_script/issue/issue.js"]
 }
 

@@ -36,3 +36,16 @@ def add_issues(events, start, end):
 		}
 		if e not in events:
 			events.append(e)
+
+@frappe.whitelist()
+def get_permission_query_conditions(user):
+	roles = frappe.get_roles(user)
+	names=[]
+	reference_names=frappe.get_all("ToDo",fields='reference_name', filters={'owner':user})
+	for i in range(0,len(reference_names)):
+		names.insert(i,reference_names[i]["reference_name"]) 
+	list2 = tuple([x.encode('UTF8') for x in list(names) if x])
+	if "technician" in roles:
+		#print frappe.db.sql("""select `tabIssue`.`name` from `tabIssue` where name in {0}""".format(list2),debug=1)
+		return "`tabIssue`.name in {0} ".format(list2);
+		

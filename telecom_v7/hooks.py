@@ -65,6 +65,9 @@ app_include_js = "/assets/js/telecom_v7.js"
 # permission_query_conditions = {
 # 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
+permission_query_conditions = {
+ "Issue": "telecom_v7.custom_script.issue.issue.get_permission_query_conditions",
+}
 #
 # has_permission = {
 # 	"Event": "frappe.desk.doctype.event.event.has_permission",
@@ -85,7 +88,10 @@ doc_events = {
     },
     "Issue": {
         "validate": "telecom_v7.custom_script.issue.issue.validate"
-    }
+    },
+    "User": {
+        "validate": "telecom_v7.custom_script.user.user.validate_employee_for_technician_role"
+    }    
 }    
 
 
@@ -93,7 +99,8 @@ doctype_js = {
     "Customer":["custom_script/customer/customer.js"],
     "Address":["custom_script/address/address.js"],
     "Contact":["custom_script/contact/contact.js"],
-    "Issue":["custom_script/issue/issue.js"]
+    "Issue":["custom_script/issue/issue.js"],
+    "Timesheet":["custom_script/timesheet/timesheet.js"]
 }
 
 # doc_events = {

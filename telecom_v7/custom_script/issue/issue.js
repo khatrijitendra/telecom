@@ -7,10 +7,33 @@ cur_frm.add_fetch("location_id","location_name", "location_name")
 
 cur_frm.cscript.refresh = function(doc, cdt, cdn){
 	set_notification_mode(doc.contact)
+	for(i=0;i<user_roles.length;i++){
+		if(user_roles[i]=="Technician"){
+			$(".strong add-assignment").css("display", "none");
+			$(".list-unstyled sidebar-menu form-assignments").hide();
+		}
+	}
+
 }
 
 cur_frm.cscript.onload = function(doc, cdt, cdn){
+	/*
+		Read Only Status
+		Read Only Due Date for Technician
+	*/
 	set_notification_mode(doc.contact)
+	
+	for(i=0;i<user_roles.length;i++){
+		if(user_roles[i]=="Technician"){
+			$(".strong add-assignment").css("display", "none");
+			$(".list-unstyled sidebar-menu form-assignments").hide();
+			cur_frm.set_df_property("due_date","read_only",1);
+			if(cur_frm.doc.status=="Closed" || cur_frm.doc.status=="Hold" ){
+				cur_frm.set_read_only()	
+			}
+
+		}
+	}
 }
 
 cur_frm.cscript.customer = function(doc, cdt, cdn){
@@ -35,12 +58,21 @@ cur_frm.cscript.contact = function(doc, cdt, cdn){
 
 cur_frm.cscript.status = function(doc, cdt, cdn){
 	if(doc.status == "Closed"){
+		frappe.msgprint("You Cannot Close Issue Here,Close Issue From Timesheet");
 		cur_frm.set_df_property("resolution_details","reqd",1)
+		cur_frm.set_value("status",cur_frm.doc.old_status); 
+		cur_frm.set_df_property("resolution_details","reqd",0)
 	}
 	else{
 		cur_frm.set_df_property("resolution_details","reqd",0)
 	}
+	cur_frm.toggle_reqd("comment_for_hold", cur_frm.doc.status=="Hold");
 }
+
+cur_frm.cscript.validate = function(frm){
+	
+}
+
 
 cur_frm.fields_dict['location_id'].get_query = function(doc, cdt, cdn) {
 	return {

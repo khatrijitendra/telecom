@@ -67,6 +67,7 @@ app_include_js = "/assets/js/telecom_v7.js"
 # }
 permission_query_conditions = {
  "Issue": "telecom_v7.custom_script.issue.issue.get_permission_query_conditions",
+ "Timesheet" :"telecom_v7.custom_script.timesheet.timesheet.get_permission_query_conditions"
 }
 #
 # has_permission = {
@@ -87,10 +88,15 @@ doc_events = {
         "autoname": "telecom_v7.custom_script.address.address.autoname"
     },
     "Issue": {
-        "validate": "telecom_v7.custom_script.issue.issue.validate"
+        "validate": "telecom_v7.custom_script.issue.issue.validate",
+        "on_update": "telecom_v7.custom_script.issue.issue.on_update"
+
     },
     "User": {
         "validate": "telecom_v7.custom_script.user.user.validate_employee_for_technician_role"
+    },
+    "Timesheet":{
+        "on_update": "telecom_v7.custom_script.timesheet.timesheet.on_update",
     }    
 }    
 
@@ -114,7 +120,14 @@ doctype_js = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
+  "all": [
+      "telecom_v7.custom_script.issue.issue.finalize_timesheet_on_thursday"
+  ]
+ 
+} 
+
+#scheduler_events = {
 # 	"all": [
 # 		"telecom_v7.tasks.all"
 # 	],

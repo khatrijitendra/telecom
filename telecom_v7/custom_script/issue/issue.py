@@ -1,10 +1,6 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.naming import make_autoname, getseries
-from frappe.boot import get_bootinfo
-
-def boot_session(bootinfo):
-	frappe.errprint(bootinfo)
 
 def validate(self, method=None):
 	if self.due_date:
@@ -13,7 +9,7 @@ def validate(self, method=None):
 
 @frappe.whitelist()
 def get_events(start, end):
-	frappe.errprint("inside my calendar")
+	#frappe.errprint("inside my calendar")
 	events = []
 	add_issues(events, start, end)
 	return events

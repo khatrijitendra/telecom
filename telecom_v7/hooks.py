@@ -87,7 +87,7 @@ doc_events = {
         "autoname": "telecom_v7.custom_script.address.address.autoname"
     },
     "Issue": {
-        "validate": "telecom_v7.custom_script.issue.issue.validate"
+        "validate": "telecom_v7.custom_script.issue.issue.validate",
     },
     "User": {
         "validate": "telecom_v7.custom_script.user.user.validate_employee_for_technician_role"

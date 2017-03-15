@@ -125,8 +125,8 @@ def send_status_notification_to_manager(owner,customer,Issue_name,location_id,st
 
 @frappe.whitelist()
 def finalize_timesheet_on_thursday():
-	if frappe.utils.data.get_datetime("2017-03-09 23:59:59").strftime('%A')=="Thursday":
-		cur_thursday=frappe.utils.data.get_datetime("2017-03-09 23:59:59")
+	if frappe.utils.data.get_datetime("2017-03-14 23:59:59").strftime('%A') == "Tuesday":
+		cur_thursday=frappe.utils.data.get_datetime("2017-03-14 23:59:59")
 		print "cur_thursday",frappe.utils.data.now_datetime()
 	today = frappe.utils.data.now_datetime()
 	offset = (today.weekday() - 5) % 7

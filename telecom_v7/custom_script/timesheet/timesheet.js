@@ -43,9 +43,14 @@ cur_frm.cscript.onload = function(frm,cdt,cdn){
 	for(i=0;i<user_roles.length;i++){
 		if(user_roles[i]=="Technician"){
 			cur_frm.set_df_property(d.billable,"read_only",1);
+			cur_frm.set_df_property(d.activity_type,"read_only",1);
+
 		}
 	}
 
+	var d  = locals[cdt][cdn];
+	console.log(d)
+	cur_frm.set_df_property(d.hours,"read_only",1);
 }
 
 cur_frm.fields_dict['time_logs'].grid.get_field('issue').get_query = function(doc, cdt, cdn) {
@@ -63,8 +68,24 @@ cur_frm.fields_dict['time_logs'].grid.get_field('issue').get_query = function(do
 cur_frm.cscript.issue_status = function(frm,cdt,cdn){
 	var d  = locals[cdt][cdn]
 	console.log(d.resolution_details,d.issue_status)
+	if(d.issue_status == "Open"){
+		cur_frm.set_df_property(d.activity_type,"read_only",1);
+
+	}
+
 	
 	//frm.fields_dict.time_logs.grid.toggle_reqd(d.resolution_details,d.issue_status =="Closed");
 	//cur_frm.toggle_reqd(d.resolution_details,d.issue_status=="Closed")	
 }
+
+frappe.ui.form.on("Timesheet Detail", {
+	time_logs_add: function(frm) {
+		console.log("______")	
+		cur_frm.get_field("fields").grid.toggle_reqd("issue", true);
+		// var field = frappe.utils.filter_dict(cur_frm.fields_dict["time_logs"].grid.grid_rows_by_docname[cdn].docfields,{"fieldname": "issue"})[0];
+		// console.log(field)
+		// field.df.reqd = true;
+		// field.refresh();
+	},
+});
 

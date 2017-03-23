@@ -69,6 +69,10 @@ cur_frm.cscript.status = function(doc, cdt, cdn){
 	cur_frm.toggle_reqd("comment_for_hold", cur_frm.doc.status=="Hold");
 }
 
+// cur_frm.cscript.customer_address =function(doc, cdt, cdn) {
+// 		erpnext.utils.get_address_display(this.frm, "customer_address");
+// }
+
 cur_frm.cscript.validate = function(frm){
 	
 }
@@ -78,6 +82,33 @@ cur_frm.fields_dict['location_id'].get_query = function(doc, cdt, cdn) {
 	return {
 		filters:{ 'customer': doc.customer }
 	}
+}
+
+cur_frm.cscript.location_id =function(doc, cdt, cdn) {
+				
+	frappe.call({
+			method:"frappe.client.get_list",
+			args:{
+				doctype:"Address",
+				filters: [
+							["name","=",cur_frm.doc.location_id],
+						],
+				fields: ["address_line1","address_line2","city","state","country"]
+			},
+			callback: function(r) {
+				if (r.message) {
+					console.log("add",r.message[0])
+					var add = "<p>"+r.message[0]['address_line1']+"</p>"
+							  +"<p>"+r.message[0]['address_line2']+"</p>"
+							  +"<p>"+r.message[0]['city']+"</p>"
+							  +"<p>"+r.message[0]['state']+"</p>"
+							  +"<p>"+ r.message[0]['country']+"</p>"
+
+					cur_frm.set_value("customer_address",add);		
+				}
+			}
+	});		
+		
 }
 
 cur_frm.fields_dict['contact'].get_query = function(doc, cdt, cdn) {

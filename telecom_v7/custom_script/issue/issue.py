@@ -178,5 +178,14 @@ def finalize_timesheet_on_thursday():
 				todo_doc.save(ignore_permissions = True)
 				print "assigne--",todo_doc.description
 
+# @frappe.whitelist()
+# def get_customer_address(name):
+# 	addres_doc=frappe.get_doc("Address",name)
+# 	# line = addres_doc.address_line1 +" "+ addres_doc.address_line2
+# 	# city = addres_doc.city
+# 	# state = addres_doc.state
+# 	# country =addres_doc.country
+# 	# address= line + "\n" + city + ""
+# 	# return 
+ 
 
-	
